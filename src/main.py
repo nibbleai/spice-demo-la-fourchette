@@ -1,5 +1,9 @@
+from spice import Generator
+
 from src.data import get_dataset, get_target, train_test_split
+from src.features.registry import registry
 from src.preprocessing import preprocess
+from src.resources import get_resources
 
 
 def main():
@@ -9,8 +13,21 @@ def main():
 
     train_data, test_data = train_test_split(data)
 
-    train_features = ...  # TO IMPLEMENT
-    test_features = ...  # TO IMPLEMENT
+    feature_generator = Generator(
+        registry,
+        resources=get_resources(),
+        features=[
+            "cyclical_pickup_hour",
+            "quantile_bin_hour",
+            "is_raining",
+            "euclidean_distance",
+            "manhattan_distance",
+            "pickup_cluster",
+            "dropoff_cluster"
+        ]
+    )
+    train_features = feature_generator.fit_transform(train_data)
+    test_features = feature_generator.transform(test_data)
 
 
 if __name__ == '__main__':
