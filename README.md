@@ -16,6 +16,11 @@
     python -m pip install -r requirements.txt --extra-index-url=${EXTRA_INDEX_URL}
     python -m pip install -e .
     ```
+    You may want to install these dependencies in a virtual environment, in which case you should enter this command first:
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate
+    ```
 
 2. Initialize spice store (Needs to be done only once)
     ```
