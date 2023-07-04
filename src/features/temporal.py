@@ -23,7 +23,7 @@ def pickup_time(data):
 
 @registry.register(name="pickup_date", depends=["pickup_time"])
 def pickup_date(pickup_time):
-    """Date of pickup"""
+    """Date of pickup."""
     return pickup_time.dt.date
 
 

@@ -44,4 +44,4 @@ def euclidean_distance(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
 )
 def manhattan_distance(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
     """Manhattan distance between pickup & dropoff positions."""
-    return (abs(pickup_lon - dropoff_lon) + abs(pickup_lat - dropoff_lat))
+    return abs(pickup_lon - dropoff_lon) + abs(pickup_lat - dropoff_lat)
