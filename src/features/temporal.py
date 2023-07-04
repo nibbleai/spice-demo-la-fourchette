@@ -1,11 +1,17 @@
+import logging
+
 import numpy as np
 import pandas as pd
+from spice import spice_logging_handler
 
 from src.config import config
 from src.features.registry import registry
 from src.features.utils import cyclical
 from src.invariants import HOURS_IN_DAY
 from src.schemas import TaxiColumn
+
+logger = logging.getLogger()
+logger.addHandler(spice_logging_handler)
 
 
 @registry.register(name="pickup_time")
@@ -43,6 +49,7 @@ class QuantileBinHour:
 
     def fit(self, pickup_hour):
         hours_bins = pd.qcut(pickup_hour, q=config.features.hours_bins)
+        logger.debug(f"Intervals for bins are: {hours_bins.cat.categories}")
         self.bins_ = hours_bins.cat.categories
         return self
 

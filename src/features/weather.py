@@ -1,8 +1,14 @@
+import logging
+
 import pandas as pd
+from spice import spice_logging_handler
 
 from src.features.registry import registry
 from src.resources import Resource
 from src.schemas import WeatherColumn
+
+logger = logging.getLogger()
+logger.addHandler(spice_logging_handler)
 
 
 @registry.register(
@@ -12,8 +18,13 @@ from src.schemas import WeatherColumn
 )
 def weather(pickup_date, weather_resource):
     """Weather features based on pickup date."""
-    right_on = [WeatherColumn.DATE]
+    logger.debug(
+        "Weather resource ranges from "
+        f"{weather_resource[WeatherColumn.DATE].min()} to "
+        f"{weather_resource[WeatherColumn.DATE].max()}"
+    )
 
+    right_on = [WeatherColumn.DATE]
     return pd.DataFrame(pickup_date).merge(
         weather_resource,
         left_on=pickup_date.name,
@@ -22,9 +33,7 @@ def weather(pickup_date, weather_resource):
     ).set_index(pickup_date.index)
 
 
-@registry.register(
-    name="is_raining", depends=["[artifact] weather"],
-)
+@registry.register(name="is_raining", depends=["[artifact] weather"])
 def is_raining(weather):
     """Is it raining on the day of pickup"""
     return (weather[WeatherColumn.PRECIPITATIONS] > 0).astype(int)
