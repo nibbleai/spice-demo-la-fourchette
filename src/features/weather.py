@@ -18,7 +18,7 @@ logger.addHandler(spice_logging_handler)
 )
 def weather(pickup_date, weather_resource):
     """Weather features based on pickup date."""
-    logger.debug(
+    logger.info(
         "Weather resource ranges from "
         f"{weather_resource[WeatherColumn.DATE].min()} to "
         f"{weather_resource[WeatherColumn.DATE].max()}"

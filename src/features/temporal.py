@@ -49,7 +49,7 @@ class QuantileBinHour:
 
     def fit(self, pickup_hour):
         hours_bins = pd.qcut(pickup_hour, q=config.features["hours_bins"])
-        logger.debug(f"Intervals for bins are: {hours_bins.cat.categories}")
+        logger.info(f"Intervals for bins are: {hours_bins.cat.categories}")
         self.bins_ = hours_bins.cat.categories
         return self
 
