@@ -12,6 +12,7 @@ from src.schemas import TaxiColumn
 
 logger = logging.getLogger()
 logger.addHandler(spice_logging_handler)
+logger.setLevel(logging.DEBUG)
 
 
 @registry.register(name="pickup_time")
