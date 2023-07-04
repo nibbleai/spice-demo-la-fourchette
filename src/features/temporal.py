@@ -1,8 +1,5 @@
-import logging
-
 import numpy as np
 import pandas as pd
-from spice import spice_logging_handler
 
 from src.config import config
 from src.features.registry import registry
@@ -10,9 +7,7 @@ from src.features.utils import cyclical
 from src.invariants import HOURS_IN_DAY
 from src.schemas import TaxiColumn
 
-logger = logging.getLogger()
-logger.addHandler(spice_logging_handler)
-logger.setLevel(logging.DEBUG)
+from . import logger
 
 
 @registry.register(name="pickup_time")

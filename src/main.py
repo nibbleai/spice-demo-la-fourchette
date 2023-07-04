@@ -6,6 +6,7 @@ from sklearn.metrics import mean_squared_error
 
 from src.data import get_dataset, get_target, train_test_split
 from src.features.registry import registry
+from src.features import spatial, temporal, weather
 from src.preprocessing import preprocess
 from src.resources import get_resources
 

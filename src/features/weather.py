@@ -1,15 +1,10 @@
-import logging
-
 import pandas as pd
-from spice import spice_logging_handler
 
 from src.features.registry import registry
 from src.resources import Resource
 from src.schemas import WeatherColumn
 
-logger = logging.getLogger()
-logger.addHandler(spice_logging_handler)
-logger.setLevel(logging.DEBUG)
+from . import logger
 
 
 @registry.register(
