@@ -48,13 +48,13 @@ class QuantileBinHour:
     """Quantile-based hour range of the pickup."""
 
     def fit(self, pickup_hour):
-        hours_bins = pd.qcut(pickup_hour, q=config.features.hours_bins)
+        hours_bins = pd.qcut(pickup_hour, q=config.features["hours_bins"])
         logger.debug(f"Intervals for bins are: {hours_bins.cat.categories}")
         self.bins_ = hours_bins.cat.categories
         return self
 
     def transform(self, pickup_hour):
         quantile_bin_hours = pd.cut(pickup_hour, bins=self.bins_)
-        hours_bins_labels = np.arange(config.features.hours_bins) + 1
+        hours_bins_labels = np.arange(config.features["hours_bins"]) + 1
 
         return quantile_bin_hours.cat.rename_categories(hours_bins_labels)
