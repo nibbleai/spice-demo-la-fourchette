@@ -33,6 +33,7 @@ def main():
     train_features = feature_generator.fit_transform(train_data).to_pandas()
     test_features = feature_generator.transform(test_data).to_pandas()
 
+    logging.info("Training model...")
     model = RandomForestRegressor().fit(train_features, train_target)
 
     predicted = model.predict(test_features)
